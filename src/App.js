@@ -2,21 +2,9 @@ import Slider from './components/Slider';
 import ColorDisplay from './components/ColorDisplay';
 import './App.css';
 import { useState } from 'react';
-import ToggleButton from './components/ToggleButton';
 // Add in bootstrap
-// Make the divs 50% width
 
 function App() {
-  // let inputList = [
-  //   ["Hue",30,]
-  // ]
-
-  let [mode, setMode] = useState('dark');
-
-  function toggleMode() { // toggle between dark and light
-    if (mode === 'dark') { setMode('light'); }
-    else { setMode('dark'); }
-  }
 
   let [foregroundBrightness, setForegroundBrightness] = useState(80);
   let [backgroundBrightness, setBackgroundBrightness] = useState(2);
@@ -96,16 +84,11 @@ function App() {
 
       </header>
       <div className='row App-body'>
-        {/* Button for toggling mode */}
-        {/* <ToggleButton mode={mode} toggleMode={toggleMode} /> */}
         {values.map((value, index) => {
           return (
             <Slider key={index} name={value.name} min={value.min} max={value.max} value={value.value} onChange={value.onChange} color={value.color} />)
         }
         )}
-        {/* <ColorDisplay key={`colorDisplay-contrast`} text={"Contrast"} 
-        foreground={foregroundBrightness} background={backgroundBrightness} hue={hueMain} /> */}
-        {/* Nine sliders */}
         {colors.map((color, index) => {
           return (
             <div key={index} className="sliderANDdisplay">
