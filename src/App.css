@@ -13,7 +13,12 @@
   }
 }
 
-.App-header, .App-header a, .App-body, .App-body a, .App-footer, .App-footer a {
+.App-header,
+.App-header a,
+.App-body,
+.App-body a,
+.App-footer,
+.App-footer a {
   background-color: #282c34;
   min-height: 20vh;
   display: flex;
@@ -30,6 +35,14 @@
 
 }
 
+input[type=text],
+input[type=button],
+input[type=submit] {
+  border-width: 2px;
+  border-style: solid;
+  padding: 1%;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -38,6 +51,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

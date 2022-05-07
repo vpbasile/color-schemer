@@ -1,5 +1,6 @@
 import Slider from './components/Slider';
 import Button from './components/Button';
+import TextInput from './components/TextInput';
 import ColorDisplay from './components/ColorDisplay';
 import './App.css';
 import { useState } from 'react';
@@ -17,6 +18,7 @@ function App() {
   let [hueDanger, setHueDanger] = useState(354.3);
   let [hueWarning, setHueWarning] = useState(45);
   let [hueInfo, setHueInfo] = useState(188.2);
+  let [fileName, setFileName] = useState("colorScheme");
 
   let brightnessArray = [
     {
@@ -101,12 +103,71 @@ function App() {
     }
   }
 
+  function onStartedDownload(id) {
+    console.log(`Started downloading: ${id}`);
+  }
+
+  function onFailed(error) {
+    console.log(`Download failed: ${error}`);
+  }
+
+  function css() {
+    let css = ``;
+    css += `
+    body {
+      background-color: hsl(${hueMain}, 50%, ${backgroundBrightness}%);
+      color: hsl(${hueMain}, 50%, ${foregroundBrightness}%);
+    }
+    /* Color classes for text */
+    .text-primary {color: hsl(${huePrimary}, 50%, ${foregroundBrightness}%);}
+    .text-secondary {color: hsl(${hueSecondary}, 50%, ${foregroundBrightness}%);}
+    .text-success {color: hsl(${hueSuccess}, 50%, ${foregroundBrightness}%);}
+    .text-danger {color: hsl(${hueDanger}, 50%, ${foregroundBrightness}%);}
+    .text-warning {color: hsl(${hueWarning}, 50%, ${foregroundBrightness}%);}
+    .text-info {color: hsl(${hueInfo}, 50%, ${foregroundBrightness}%);}
+    /* Color classes for background */
+    .bg-primary {background-color: hsl(${huePrimary}, 50%, ${backgroundBrightness}%);}
+    .bg-secondary {background-color: hsl(${hueSecondary}, 50%, ${backgroundBrightness}%);}
+    .bg-success {background-color: hsl(${hueSuccess}, 50%, ${backgroundBrightness}%);}
+    .bg-danger {background-color: hsl(${hueDanger}, 50%, ${backgroundBrightness}%);}
+    .bg-warning {background-color: hsl(${hueWarning}, 50%, ${backgroundBrightness}%);}
+    .bg-info {background-color: hsl(${hueInfo}, 50%, ${backgroundBrightness}%);}
+    /* Color classes for border */
+    .border-primary {border-color: hsl(${huePrimary}, 50%, ${foregroundBrightness}%);}
+    .border-secondary {border-color: hsl(${hueSecondary}, 50%, ${foregroundBrightness}%);}
+    .border-success {border-color: hsl(${hueSuccess}, 50%, ${foregroundBrightness}%);}
+    .border-danger {border-color: hsl(${hueDanger}, 50%, ${foregroundBrightness}%);}
+    .border-warning {border-color: hsl(${hueWarning}, 50%, ${foregroundBrightness}%);}
+    .border-info {border-color: hsl(${hueInfo}, 50%, ${foregroundBrightness}%);}
+
+    `;
+    return css;
+  }
+
+
   function saveColors() {
     console.log("Saving colors...");
-    let output = { brightnessArray: brightnessArray, hueArray: hueArray };
-    // fs.writeFile('./output/colors.json', JSON.stringify(output), (err) => { console.log(err); });
-    saveStateToLocalStorage(output);
+    // Create two files - a CSS and a JSON
+    let outputJSON = JSON.stringify({ brightnessArray: brightnessArray, hueArray: hueArray }, null, 4);
+    const blobJSON = new Blob([outputJSON]);
+    let outputCSS = css();
+    const blobCSS = new Blob([outputCSS]);
+    // Create links for the files
+    const downloadJSON = URL.createObjectURL(blobJSON, { type: "text/plain" });
+    const downloadCSS = URL.createObjectURL(blobCSS, { type: "text/css" });
+    // Make links
+    var jsonLink = document.createElement("a");
+    jsonLink.href = downloadJSON
+    jsonLink.download = `${fileName}.json`;
+    var cssLink = document.createElement("a");
+    cssLink.href = downloadCSS
+    cssLink.download = `${fileName}.css`;
+    // Download them
+    jsonLink.click();
+    cssLink.click();
+    // saveStateToLocalStorage(output);
     console.log("Colors saved!");
+
   }
 
   return (
@@ -119,15 +180,18 @@ function App() {
           }}>
 
           <h1>Color Schemer</h1>
-
-          {/* <Button onClick={saveColors} value="Save to file" /> */}
+          <hr />
+          <TextInput onChange={(e) => {setFileName(e.target.value); console.log(fileName)}} defaultValue={fileName} foregroundBrightness={backgroundBrightness} backgroundBrightness={foregroundBrightness} hue={hueMain} labelText={"Input filename: "} />
+          <Button onClick={saveColors} value="Save to file" foregroundBrightness={backgroundBrightness} backgroundBrightness={foregroundBrightness} hue={hueMain} labelText={"Click to export: "} />
+          <hr />
           {brightnessArray.map((brightness, index) => {
             return (
               <Slider key={index} name={brightness.name} min={brightness.sliderMin} max={brightness.sliderMax} sliderValue={brightness.sliderValue} onChange={brightness.onChange} />
             )
           }
           )}
-          <div class="textBox">
+          <hr />
+          <div className="textBox">
             <h2>Regular text</h2>
             <p>This is what most of your text will look like.  Below are the standard Bootstrap color classes.
               These sliders will eventually set apparent brightness, but for now they just control l as in hsl.  I also want to display the apparent brightness contrast ratio.
