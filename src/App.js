@@ -12,6 +12,7 @@ function App() {
   let [foregroundBrightness, setForegroundBrightness] = useState(55);
   let [backgroundBrightness, setBackgroundBrightness] = useState(5);
   let [hueMain, setHueMain] = useState(150);
+  let [saturationMain, setSaturationMain] = useState(100);
   let [huePrimary, setHuePrimary] = useState(211.1);
   let [hueSecondary, setHueSecondary] = useState(278.2);
   let [hueSuccess, setHueSuccess] = useState(133.7);
@@ -115,31 +116,30 @@ function App() {
     let css = ``;
     css += `
     body {
-      background-color: hsl(${hueMain}, 50%, ${backgroundBrightness}%);
-      color: hsl(${hueMain}, 50%, ${foregroundBrightness}%);
+      background-color: hsl(${hueMain}, ${saturationMain}%, ${backgroundBrightness}%);
+      color: hsl(${hueMain}, ${saturationMain}%, ${foregroundBrightness}%);
     }
     /* Color classes for text */
-    .text-primary {color: hsl(${huePrimary}, 50%, ${foregroundBrightness}%);}
-    .text-secondary {color: hsl(${hueSecondary}, 50%, ${foregroundBrightness}%);}
-    .text-success {color: hsl(${hueSuccess}, 50%, ${foregroundBrightness}%);}
-    .text-danger {color: hsl(${hueDanger}, 50%, ${foregroundBrightness}%);}
-    .text-warning {color: hsl(${hueWarning}, 50%, ${foregroundBrightness}%);}
-    .text-info {color: hsl(${hueInfo}, 50%, ${foregroundBrightness}%);}
+    .text-primary {color: hsl(${huePrimary}, 50%, ${foregroundBrightness}%) !important;}
+    .text-secondary {color: hsl(${hueSecondary}, 50%, ${foregroundBrightness}%) !important;}
+    .text-success {color: hsl(${hueSuccess}, 50%, ${foregroundBrightness}%) !important;}
+    .text-danger {color: hsl(${hueDanger}, 50%, ${foregroundBrightness}%) !important;}
+    .text-warning {color: hsl(${hueWarning}, 50%, ${foregroundBrightness}%) !important;}
+    .text-info {color: hsl(${hueInfo}, 50%, ${foregroundBrightness}%) !important;}
     /* Color classes for background */
-    .bg-primary {background-color: hsl(${huePrimary}, 50%, ${backgroundBrightness}%);}
-    .bg-secondary {background-color: hsl(${hueSecondary}, 50%, ${backgroundBrightness}%);}
-    .bg-success {background-color: hsl(${hueSuccess}, 50%, ${backgroundBrightness}%);}
-    .bg-danger {background-color: hsl(${hueDanger}, 50%, ${backgroundBrightness}%);}
-    .bg-warning {background-color: hsl(${hueWarning}, 50%, ${backgroundBrightness}%);}
-    .bg-info {background-color: hsl(${hueInfo}, 50%, ${backgroundBrightness}%);}
+    .bg-primary {background-color: hsl(${huePrimary}, 50%, ${backgroundBrightness}%) !important;}
+    .bg-secondary {background-color: hsl(${hueSecondary}, 50%, ${backgroundBrightness}%) !important;}
+    .bg-success {background-color: hsl(${hueSuccess}, 50%, ${backgroundBrightness}%) !important;}
+    .bg-danger {background-color: hsl(${hueDanger}, 50%, ${backgroundBrightness}%) !important;}
+    .bg-warning {background-color: hsl(${hueWarning}, 50%, ${backgroundBrightness}%) !important;}
+    .bg-info {background-color: hsl(${hueInfo}, 50%, ${backgroundBrightness}%) !important;}
     /* Color classes for border */
-    .border-primary {border-color: hsl(${huePrimary}, 50%, ${foregroundBrightness}%);}
-    .border-secondary {border-color: hsl(${hueSecondary}, 50%, ${foregroundBrightness}%);}
-    .border-success {border-color: hsl(${hueSuccess}, 50%, ${foregroundBrightness}%);}
-    .border-danger {border-color: hsl(${hueDanger}, 50%, ${foregroundBrightness}%);}
-    .border-warning {border-color: hsl(${hueWarning}, 50%, ${foregroundBrightness}%);}
-    .border-info {border-color: hsl(${hueInfo}, 50%, ${foregroundBrightness}%);}
-
+    .border-primary {border-color: hsl(${huePrimary}, 50%, ${foregroundBrightness}%) !important;}
+    .border-secondary {border-color: hsl(${hueSecondary}, 50%, ${foregroundBrightness}%) !important;}
+    .border-success {border-color: hsl(${hueSuccess}, 50%, ${foregroundBrightness}%) !important;}
+    .border-danger {border-color: hsl(${hueDanger}, 50%, ${foregroundBrightness}%) !important;}
+    .border-warning {border-color: hsl(${hueWarning}, 50%, ${foregroundBrightness}%) !important;}
+    .border-info {border-color: hsl(${hueInfo}, 50%, ${foregroundBrightness}%) !important;}
     `;
     return css;
   }
@@ -175,8 +175,8 @@ function App() {
       <div className='row App-body'>
         <div id='pageSimulator' className='col-md-6'
           style={{
-            backgroundColor: `hsl(${hueMain}, 50%, ${backgroundBrightness}%)`,
-            color: `hsl(${hueMain}, 50%, ${foregroundBrightness}%)`
+            backgroundColor: `hsl(${hueMain}, ${saturationMain}%, ${backgroundBrightness}%)`,
+            color: `hsl(${hueMain}, ${saturationMain}%, ${foregroundBrightness}%)`
           }}>
 
           <h1>Color Schemer</h1>
@@ -190,6 +190,7 @@ function App() {
             )
           }
           )}
+          <Slider key={'mainSat'} name={'Main saturation'} min={0} max={100} sliderValue={saturationMain} onChange={(e) => {setSaturationMain(e.target.value); console.log(saturationMain)}} />
           <hr />
           <div className="textBox">
             <h2>Regular text</h2>
@@ -198,25 +199,29 @@ function App() {
             </p>
             <Slider key={`slider0`} {...hueArray[0]} />
           </div>
-          <div id='primaryDisplay' className='textBox' style={{ backgroundColor: `hsl(${huePrimary}, 50%, ${backgroundBrightness}%)`, color: `hsl(${huePrimary}, 50%, ${foregroundBrightness}%)` }}>
+          <div id='primaryDisplay' className='textBox' style={{ backgroundColor: `hsl(${huePrimary}, 50%, ${backgroundBrightness}%)`, color: `hsl(${huePrimary}, 50%, ${foregroundBrightness}%)` , border: `2px solid hsl(${huePrimary}, 50%, ${foregroundBrightness}%)`}}>
             <h2><Slider key={`slider1`} {...hueArray[1]} /></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
           </div>
-          <div id='secondaryDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueSecondary}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueSecondary}, 50%, ${foregroundBrightness}%)` }}>
+          <div id='secondaryDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueSecondary}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueSecondary}, 50%, ${foregroundBrightness}%)` , border: `2px solid hsl(${hueSecondary}, 50%, ${foregroundBrightness}%)`}}>
             <h2><Slider key={`slider2`} {...hueArray[2]} /></h2>
             <p>Secondary should really be gray.  I haven't figured out how to calculate the grays that match the apparent brightness contrast ratio.</p>
           </div>
-          <div id='successDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueSuccess}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueSuccess}, 50%, ${foregroundBrightness}%)` }}>
+          <div id='successDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueSuccess}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueSuccess}, 50%, ${foregroundBrightness}%)` , border: `2px solid hsl(${hueSuccess}, 50%, ${foregroundBrightness}%)`}}>
             <h2><Slider key={`slider3`} {...hueArray[3]} /></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
+            <p>Success. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
           </div>
-          <div id='dangerDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueDanger}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueDanger}, 50%, ${foregroundBrightness}%)` }}>
+          <div id='dangerDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueDanger}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueDanger}, 50%, ${foregroundBrightness}%)` , border: `2px solid hsl(${hueDanger}, 50%, ${foregroundBrightness}%)`}}>
             <h2><Slider key={`slider4`} {...hueArray[4]} /></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
+            <p>Danger. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
           </div>
-          <div id='warningDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueWarning}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueWarning}, 50%, ${foregroundBrightness}%)` }}>
+          <div id='warningDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueWarning}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueWarning}, 50%, ${foregroundBrightness}%)` , border: `2px solid hsl(${hueWarning}, 50%, ${foregroundBrightness}%)`}}>
             <h2><Slider key={`slider5`} {...hueArray[5]} /></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
+            <p>Warning. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
+          </div>
+          <div id='infoDisplay' className='textBox' style={{ backgroundColor: `hsl(${hueInfo}, 50%, ${backgroundBrightness}%)`, color: `hsl(${hueInfo}, 50%, ${foregroundBrightness}%)` , border: `2px solid hsl(${hueInfo}, 50%, ${foregroundBrightness}%)`}}>
+            <h2><Slider key={`slider6`} {...hueArray[6]} /></h2>
+            <p>Info. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod, nunc eget euismod consectetur, nisl nisl aliquet nunc, euismod euismod nunc nisl euismod.</p>
           </div>
           {/* Nav Bar */}
           <nav className="navbar navbar-expand-lg">
