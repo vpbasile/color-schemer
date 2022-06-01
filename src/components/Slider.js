@@ -6,13 +6,14 @@ export default function Slider(props) {
 	let sliderValue = props.sliderValue
 	let onChange = props.onChange
 	let name = props.name
+	let style = props.style
 	let everything =
 		<div className="wrapper">
 			<div className='label w-100'>
-				<label htmlFor={name}>{props.name}: {sliderValue}</label>
+				<label htmlFor={name} style={style}>{props.name}: {sliderValue}</label>
 			</div>
 			<div className="slider w-100">
-				<input name={props.name} type="range" min={range.min} max={range.max} value={sliderValue} onChange={onChange} />
+				<input name={props.name} type="range" min={range.min} max={range.max} value={sliderValue} onChange={onChange} style={style} />
 			</div>
 		</div>
 		;

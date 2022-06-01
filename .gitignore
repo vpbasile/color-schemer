@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/colorHandler.js
+src/scraps.js
+src/cssPrep.js
+public/index.html
+src/colorLib.js
