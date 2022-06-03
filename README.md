@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Color Schemer
+
+***A tool for quickly creating acessible color palettes***
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
