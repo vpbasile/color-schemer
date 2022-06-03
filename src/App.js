@@ -151,7 +151,7 @@ function App() {
               </tr></tbody>
             </table>
           </div>
-          <p>{currentContrastRatio.text} This is what most of your text will look like.</p>
+          <p>{currentContrastRatio.text}</p>
           <hr />
           <h2>Step 2:</h2>
           <p>Select a hue for the main foreground and background colors.</p>
@@ -174,7 +174,7 @@ function App() {
           <hr />
           <h2>Step 3:</h2>
           <p>Choose hues to assign to the standard Bootstrap color classes.</p>
-          <p>{lorem}</p>
+          <p>This is what most of your text will look like. {lorem}</p>
         </div>
         <div id='primaryDisplay' className='textBox' style={{ backgroundColor: `hsl(${huePrimary}, 50%, ${backgroundBrightness}%)`, color: `hsl(${huePrimary}, 50%, ${foregroundBrightness}%)`, border: `2px solid hsl(${huePrimary}, 50%, ${foregroundBrightness}%)` }}>
           <h2>Primary text</h2>
@@ -194,9 +194,13 @@ function App() {
         {loremDiv}
         <div id='secondaryDisplay' className='textBox' style={{ backgroundColor: `hsl(0, 0%, ${backgroundBrightness}%)`, color: `hsl(0, 0%, ${foregroundBrightness}%)`, border: `2px solid hsl(0, 0%, ${foregroundBrightness}%)` }}>
           <h2>Secondary text</h2>
-          <h2><Slider key={`slider2`} {...hueArray[2]} style={{ backgroundColor: `hsl(0, 0%, ${backgroundBrightness}%)`, color: `hsl(0, 0%, ${foregroundBrightness}%)` }} /></h2>
-          <p>Secondary should really be gray.  I haven't figured out how to calculate the grays that match the apparent brightness contrast ratio.</p>
-          <table id='secondaryCodes' className='table'><thead><td></td><td>HSL</td></thead>
+          <h2><Slider key={`slider2`} disabled={true} {...hueArray[2]} style={{ backgroundColor: `hsl(0, 0%, ${backgroundBrightness}%)`, color: `hsl(0, 0%, ${foregroundBrightness}%)` }} /></h2>
+          <p><sapn class="fw-bold">Secondary should really be gray.</sapn> {lorem}</p>
+          <table id='secondaryCodes' className='table'><thead><tr>
+            <tr>
+              <td></td><td>HSL</td>
+            </tr>
+          </tr></thead>
             <tbody>
               <tr>
                 <td>background</td><td>hsl(0, 0%, {backgroundBrightness}%)</td>
