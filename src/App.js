@@ -158,7 +158,7 @@ function App() {
           {/* <> Sliders to select hue and satiration */}
           <Slider key={`slider0`} {...hueArray[0]} style={{ color: `hsl(${hueMain}, ${saturationMain}%, ${foregroundBrightness}%)` }} />
           {/* <Slider key={'mainSat'} name={'Main saturation'} min={0} max={100} sliderValue={saturationMain} onChange={(e) => { setSaturationMain(e.target.value); console.log(saturationMain) }}  style={{color: `hsl(${hueMain}, ${saturationMain}%, ${foregroundBrightness}%)`}}/> */}
-          <p>{lorem}</p>
+          <p>This is what most of your text will look like. {lorem}</p>
           <table className='table'><thead><td></td><td>HSL</td></thead>
             <tbody>
               <tr>
@@ -174,12 +174,12 @@ function App() {
           <hr />
           <h2>Step 3:</h2>
           <p>Choose hues to assign to the standard Bootstrap color classes.</p>
-          <p>This is what most of your text will look like. {lorem}</p>
+          <p>{lorem}</p>
         </div>
         <div id='primaryDisplay' className='textBox' style={{ backgroundColor: `hsl(${huePrimary}, 50%, ${backgroundBrightness}%)`, color: `hsl(${huePrimary}, 50%, ${foregroundBrightness}%)`, border: `2px solid hsl(${huePrimary}, 50%, ${foregroundBrightness}%)` }}>
           <h2>Primary text</h2>
           <h2><Slider key={`slider1`} {...hueArray[1]} style={{ backgroundColor: `hsl(${huePrimary}, 50%, ${backgroundBrightness}%)`, color: `hsl(${huePrimary}, 50%, ${foregroundBrightness}%)` }} /></h2>
-          <p>This is primary text. {lorem}</p>
+          <p><span className=''>This is primary text.</span> {lorem}</p>
           <table id='primaryCodes' className='table'><thead><td></td><td>HSL</td></thead>
             <tbody>
               <tr>
@@ -195,7 +195,7 @@ function App() {
         <div id='secondaryDisplay' className='textBox' style={{ backgroundColor: `hsl(0, 0%, ${backgroundBrightness}%)`, color: `hsl(0, 0%, ${foregroundBrightness}%)`, border: `2px solid hsl(0, 0%, ${foregroundBrightness}%)` }}>
           <h2>Secondary text</h2>
           <h2><Slider key={`slider2`} disabled={true} {...hueArray[2]} style={{ backgroundColor: `hsl(0, 0%, ${backgroundBrightness}%)`, color: `hsl(0, 0%, ${foregroundBrightness}%)` }} /></h2>
-          <p><sapn class="fw-bold">Secondary should really be gray.</sapn> {lorem}</p>
+          <p><span class="fw-bold">Secondary should really be gray.</span> {lorem}</p>
           <table id='secondaryCodes' className='table'><thead><tr>
             <tr>
               <td></td><td>HSL</td>
