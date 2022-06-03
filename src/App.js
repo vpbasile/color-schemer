@@ -308,7 +308,10 @@ function App() {
     // Normalize the luminosity values from 0:100 to 0:1
     lumForeground = lumForeground / 100;
     lumBackground = lumBackground / 100;
-    let ratio = (lumForeground + 0.05) / (lumBackground + 0.05)
+    // The formula assumes that lumForeground is the luminance of the lighter of the two colors, and lumBackground is the luminance of the darker of the two colors.
+    let ratio
+    if(lumForeground > lumBackground) { ratio = (lumForeground + 0.05) / (lumBackground + 0.05) }
+    else { ratio = (lumBackground + 0.05) / (lumForeground + 0.05) }
     // Keep it to one decimal place
     ratio = Math.round(ratio * 10) / 10;
     if (ratio >= 7) {
